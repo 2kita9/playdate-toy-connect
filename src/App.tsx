@@ -10,6 +10,8 @@ import ToyGuide from "./pages/ToyGuide";
 import ToyExchange from "./pages/ToyExchange";
 import ToyDetail from "./pages/ToyDetail";
 import UserProfile from "./pages/UserProfile";
+import SignIn from "./pages/SignIn";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/exchange" element={<ToyExchange />} />
           <Route path="/toy/:id" element={<ToyDetail />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/register" element={<Register />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

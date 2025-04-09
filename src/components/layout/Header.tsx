@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Bell, Home, MessageSquare, Search, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Bell, Home, MessageSquare, Search, User, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
@@ -15,7 +15,16 @@ import logo from '@/assets/logo.svg';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   
+  const handleSignIn = () => {
+    navigate('/signin');
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
       <div className="container mx-auto px-4 py-3">
@@ -93,8 +102,11 @@ const Header = () => {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Button variant="outline" onClick={() => setIsLoggedIn(true)}>Sign In</Button>
-                <Button onClick={() => setIsLoggedIn(true)}>Register</Button>
+                <Button variant="outline" onClick={handleSignIn}>Sign In</Button>
+                <Button onClick={handleRegister} className="flex items-center gap-2">
+                  <LogIn size={16} />
+                  Register
+                </Button>
               </div>
             )}
           </div>

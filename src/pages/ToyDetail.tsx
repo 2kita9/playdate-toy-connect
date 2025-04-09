@@ -45,7 +45,7 @@ const toysData = {
     ageGroup: '1-3',
     category: 'Educational',
     rating: 4.8,
-    reviews: 126,
+    reviewCount: 126,
     description: 'This premium wooden block set includes 100 solid wood blocks in 4 colors and 9 shapes. Ideal for toddlers to develop fine motor skills, hand-eye coordination, and creative thinking. Made from sustainable wood with non-toxic, child-safe paints.',
     features: [
       '100 wooden blocks in various shapes and colors',
@@ -67,13 +67,13 @@ const toysData = {
       id: 'user123',
       name: 'Sarah Parker',
       avatar: '/avatars/sarah.jpg',
-      location: 'Brooklyn, NY',
+      location: 'Mumbai, India',
       rating: 4.9,
       exchanges: 24
     },
     condition: 'Like New',
-    originalPrice: '$45.99',
-    reviews: [
+    originalPrice: '₹2,499',
+    reviewItems: [
       {
         id: 'r1',
         user: 'Michael T.',
@@ -194,7 +194,7 @@ const ToyDetail = () => {
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">{toy.name}</h1>
                 <div className="flex items-center gap-2 mb-4">
                   <StarRating rating={toy.rating} />
-                  <span className="text-gray-500">({toy.reviews} reviews)</span>
+                  <span className="text-gray-500">({toy.reviewCount} reviews)</span>
                 </div>
               </div>
               
@@ -310,7 +310,7 @@ const ToyDetail = () => {
               
               <TabsContent value="reviews" className="text-gray-700">
                 <div className="space-y-6">
-                  {toy.reviews.map(review => (
+                  {toy.reviewItems.map(review => (
                     <div key={review.id} className="border-b pb-4">
                       <div className="flex justify-between mb-2">
                         <div className="flex items-center gap-2">
