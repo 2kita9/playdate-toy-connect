@@ -63,13 +63,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for our toy app
-				'toy-blue': '#2B9DF4',
-				'toy-green': '#42C486',
-				'toy-yellow': '#FFD166',
-				'toy-pink': '#FF6B6B',
-				'toy-purple': '#9B7BF7',
-				'toy-soft-bg': '#F9FAFE',
+				// Custom colors for our toy app in nude brown and beige theme
+				'toy-blue': '#BE9B7B', // Changed to nude brown
+				'toy-green': '#C4A484', // Changed to darker beige
+				'toy-yellow': '#E8D0A9', // Changed to light beige
+				'toy-pink': '#D4B996', // Changed to medium beige
+				'toy-purple': '#A47551', // Changed to darker brown
+				'toy-soft-bg': '#F5F2EA', // Changed to softer beige background
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

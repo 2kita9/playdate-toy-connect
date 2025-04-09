@@ -89,10 +89,10 @@ const SignIn = () => {
     <Layout>
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-md mx-auto">
-          <Card className="border-2 shadow-md">
+          <Card className="border-2 shadow-md bg-white">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-2xl font-bold">Sign in to ToyGuider</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-2xl font-bold text-[#A47551]">Sign in to ToyGuider</CardTitle>
+              <CardDescription className="text-[#BE9B7B]">
                 Enter your email and password to access your account
               </CardDescription>
             </CardHeader>
@@ -104,13 +104,13 @@ const SignIn = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-[#A47551]">Email</FormLabel>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                          <Mail className="absolute left-3 top-3 h-4 w-4 text-[#BE9B7B]" />
                           <FormControl>
                             <Input 
                               placeholder="your.email@example.com" 
-                              className="pl-10" 
+                              className="pl-10 border-[#E8D0A9]" 
                               {...field} 
                             />
                           </FormControl>
@@ -124,20 +124,20 @@ const SignIn = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel className="text-[#A47551]">Password</FormLabel>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-[#BE9B7B]" />
                           <FormControl>
                             <Input 
                               type={isPasswordVisible ? "text" : "password"} 
                               placeholder="••••••••" 
-                              className="pl-10" 
+                              className="pl-10 border-[#E8D0A9]" 
                               {...field} 
                             />
                           </FormControl>
                           <button 
                             type="button"
-                            className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+                            className="absolute right-3 top-3 text-[#BE9B7B] hover:text-[#A47551]"
                             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
                           >
                             {isPasswordVisible ? 
@@ -160,10 +160,11 @@ const SignIn = () => {
                             id="remember" 
                             checked={field.value} 
                             onCheckedChange={field.onChange}
+                            className="border-[#D4B996] text-[#BE9B7B]"
                           />
                           <label 
                             htmlFor="remember"
-                            className="text-sm text-gray-600 cursor-pointer"
+                            className="text-sm text-[#A47551] cursor-pointer"
                           >
                             Remember me
                           </label>
@@ -174,15 +175,15 @@ const SignIn = () => {
                       Forgot password?
                     </Link>
                   </div>
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" className="w-full bg-[#BE9B7B] hover:bg-[#A47551]">
                     <LogIn className="mr-2 h-4 w-4" />
                     Sign In
                   </Button>
                 </form>
               </Form>
             </CardContent>
-            <CardFooter className="border-t p-6 flex flex-col gap-4">
-              <div className="text-center text-sm text-gray-600">
+            <CardFooter className="border-t p-6 flex flex-col gap-4 border-[#E8D0A9]">
+              <div className="text-center text-sm text-[#A47551]">
                 Don't have an account?{" "}
                 <Link to="/register" className="font-medium text-toy-blue hover:underline">
                   Create an account
