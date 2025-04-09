@@ -1,7 +1,6 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Bell, Home, MessageSquare, Search, User, LogIn } from 'lucide-react';
+import { Bell, Home, MessageSquare, Search, User, LogIn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
@@ -23,10 +22,20 @@ import logo from '@/assets/logo.svg';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   
-  // Mock toy data for search - in a real app this would come from an API or context
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('isLoggedIn');
+    const storedUserProfile = localStorage.getItem('userProfile');
+    
+    if (loginStatus === 'true' && storedUserProfile) {
+      setIsLoggedIn(true);
+      setUserProfile(JSON.parse(storedUserProfile));
+    }
+  }, []);
+  
   const toyResults = [
     { id: '1', name: 'Wooden Building Blocks Set', category: 'Educational', age: '1-3' },
     { id: '2', name: 'Interactive Learning Tablet', category: 'Electronics', age: '3-6' },
@@ -41,6 +50,14 @@ const Header = () => {
 
   const handleRegister = () => {
     navigate('/register');
+  };
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userProfile');
+    setIsLoggedIn(false);
+    setUserProfile(null);
+    navigate('/');
   };
 
   React.useEffect(() => {
@@ -63,7 +80,6 @@ const Header = () => {
     <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="h-10 w-10 bg-toy-blue rounded-lg flex items-center justify-center">
               <img src={logo} alt="ToyGuider" className="h-6 w-6" />
@@ -71,7 +87,6 @@ const Header = () => {
             <span className="font-bold text-xl text-gray-800">ToyGuider</span>
           </Link>
           
-          {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <Link to="/" className="font-medium text-gray-700 hover:text-toy-blue transition-colors">
               Home
@@ -90,7 +105,6 @@ const Header = () => {
             </Link>
           </nav>
           
-          {/* Search and User Actions */}
           <div className="flex items-center gap-4">
             <Button 
               variant="ghost" 
@@ -101,7 +115,7 @@ const Header = () => {
               <Search size={20} />
             </Button>
             
-            {isLoggedIn ? (
+            {isLoggedIn && userProfile ? (
               <div className="flex items-center gap-3">
                 <Button variant="ghost" size="icon" className="text-gray-600 relative">
                   <Bell size={20} />
@@ -116,8 +130,10 @@ const Header = () => {
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="rounded-full h-10 w-10 p-0">
                       <Avatar className="h-10 w-10">
-                        <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                        <AvatarFallback className="bg-toy-blue text-white">UN</AvatarFallback>
+                        <AvatarImage src={userProfile.avatar} alt={userProfile.name} />
+                        <AvatarFallback className="bg-toy-blue text-white">
+                          {userProfile.name.split(' ').map((n: string) => n[0]).join('')}
+                        </AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
@@ -128,13 +144,13 @@ const Header = () => {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link to="/profile/toys" className="flex items-center gap-2 w-full">
+                      <Link to="/profile" className="flex items-center gap-2 w-full">
                         <Home size={16} /> My Toys
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => setIsLoggedIn(false)}>
-                      Log out
+                    <DropdownMenuItem onClick={handleLogout} className="flex items-center gap-2">
+                      <LogOut size={16} /> Log out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

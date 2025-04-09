@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -25,7 +25,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { LogIn, Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -53,13 +52,37 @@ const SignIn = () => {
   const onSubmit = (values: FormValues) => {
     console.log(values);
     // In a real app, this would make an API call to authenticate the user
+    
+    // Create a mock user profile in localStorage
+    const userProfile = {
+      id: 'user123',
+      name: 'Sarah Parker',
+      email: values.email,
+      avatar: '/avatars/sarah.jpg',
+      phone: '(555) 123-4567',
+      location: 'Brooklyn, NY',
+      bio: 'Mom of two wonderful kids (ages 3 and 5). Looking for educational toys that support creativity and problem-solving skills. Happy to exchange toys that my children have outgrown!',
+      joinDate: 'January 2023',
+      rating: 4.9,
+      reviews: 26,
+      exchanges: 24,
+      interests: ['STEM Toys', 'Educational', 'Outdoor Play', 'Art & Craft'],
+      childrenAges: ['3 years', '5 years'],
+      trustScore: 98,
+      coverPhoto: '/images/profile-cover.jpg',
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
+    localStorage.setItem('isLoggedIn', 'true');
+    
     toast({
       title: "Sign-in successful",
       description: "Welcome back to ToyGuider!",
     });
     
-    // Redirect to home page after successful login
-    navigate('/');
+    // Redirect to profile page after successful login
+    navigate('/profile');
   };
 
   return (

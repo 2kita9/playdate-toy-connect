@@ -62,13 +62,37 @@ const Register = () => {
   const onSubmit = (values: FormValues) => {
     console.log(values);
     // In a real app, this would make an API call to register the user
+    
+    // Create a user profile in localStorage
+    const userProfile = {
+      id: 'user' + Math.floor(Math.random() * 1000),
+      name: values.name,
+      email: values.email,
+      avatar: '/avatars/default.jpg',
+      phone: '',
+      location: 'New Delhi, India', // Default to India as requested
+      bio: 'New ToyGuider member excited to connect with other parents!',
+      joinDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' }),
+      rating: 5.0,
+      reviews: 0,
+      exchanges: 0,
+      interests: ['Educational'],
+      childrenAges: [],
+      trustScore: 90,
+      coverPhoto: '/images/profile-cover.jpg',
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('userProfile', JSON.stringify(userProfile));
+    localStorage.setItem('isLoggedIn', 'true');
+    
     toast({
       title: "Registration successful",
-      description: "Welcome to ToyGuider! Please check your email to verify your account.",
+      description: "Welcome to ToyGuider! Your profile has been created.",
     });
 
-    // Redirect to home page after successful registration
-    navigate('/');
+    // Redirect to profile page after successful registration
+    navigate('/profile');
   };
 
   return (
