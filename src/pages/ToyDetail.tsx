@@ -80,7 +80,7 @@ const toysData = {
         avatar: '/avatars/michael.jpg',
         rating: 5,
         date: '2025-02-15',
-        comment: 'My 2-year-old loves these blocks! The quality is excellent and they've held up to daily play for months.'
+        comment: 'My 2-year-old loves these blocks! The quality is excellent and they\'ve held up to daily play for months.'
       },
       {
         id: 'r2',
