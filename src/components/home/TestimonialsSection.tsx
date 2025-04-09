@@ -18,7 +18,7 @@ const testimonials = [
     name: 'Sarah Johnson',
     role: 'Mother of 2',
     avatar: '/avatars/sarah.jpg',
-    content: 'ToyGuider has been a game-changer for our family! I've exchanged over 10 toys that my kids outgrew and found perfect age-appropriate replacements. The parent matching feature introduced me to local moms with similar parenting styles.',
+    content: 'ToyGuider has been a game-changer for our family! I\'ve exchanged over 10 toys that my kids outgrew and found perfect age-appropriate replacements. The parent matching feature introduced me to local moms with similar parenting styles.',
     rating: 5
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     name: 'Michael Chen',
     role: 'Father of 1',
     avatar: '/avatars/michael.jpg',
-    content: 'As a first-time dad, I had no idea what toys would help my daughter's development. The age-based recommendations are spot on, and I love connecting with other parents who share tips on which toys actually last!',
+    content: 'As a first-time dad, I had no idea what toys would help my daughter\'s development. The age-based recommendations are spot on, and I love connecting with other parents who share tips on which toys actually last!',
     rating: 5
   },
   {
@@ -34,7 +34,7 @@ const testimonials = [
     name: 'Priya Sharma',
     role: 'Mother of 3',
     avatar: '/avatars/priya.jpg',
-    content: 'We've saved so much money using the toy exchange feature! My kids get excited every time a "new" toy arrives. The platform made it easy to find other parents interested in sustainable consumption.',
+    content: 'We\'ve saved so much money using the toy exchange feature! My kids get excited every time a "new" toy arrives. The platform made it easy to find other parents interested in sustainable consumption.',
     rating: 4
   },
   {
