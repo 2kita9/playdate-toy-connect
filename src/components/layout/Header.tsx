@@ -11,11 +11,29 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
 import logo from '@/assets/logo.svg';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
+  
+  // Mock toy data for search - in a real app this would come from an API or context
+  const toyResults = [
+    { id: '1', name: 'Wooden Building Blocks Set', category: 'Educational', age: '1-3' },
+    { id: '2', name: 'Interactive Learning Tablet', category: 'Electronics', age: '3-6' },
+    { id: '3', name: 'Magnetic Tile Building Set', category: 'Construction', age: '4-8' },
+    { id: '4', name: 'Plush Elephant Toy', category: 'Plush Toys', age: '0-2' },
+    { id: '5', name: 'Science Experiment Kit', category: 'STEM', age: '6-10' },
+  ];
   
   const handleSignIn = () => {
     navigate('/signin');
@@ -23,6 +41,22 @@ const Header = () => {
 
   const handleRegister = () => {
     navigate('/register');
+  };
+
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen((open) => !open);
+      }
+    };
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
+
+  const handleSelectToy = (toyId: string) => {
+    setSearchOpen(false);
+    navigate(`/toy/${toyId}`);
   };
 
   return (
@@ -58,7 +92,12 @@ const Header = () => {
           
           {/* Search and User Actions */}
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-gray-600">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-gray-600"
+              onClick={() => setSearchOpen(true)}
+            >
               <Search size={20} />
             </Button>
             
@@ -112,6 +151,28 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
+        <CommandInput placeholder="Search for toys..." />
+        <CommandList>
+          <CommandEmpty>No toys found.</CommandEmpty>
+          <CommandGroup heading="Toys">
+            {toyResults.map((toy) => (
+              <CommandItem 
+                key={toy.id}
+                onSelect={() => handleSelectToy(toy.id)}
+                className="flex justify-between"
+              >
+                <span>{toy.name}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Age: {toy.age}</span>
+                  <span className="text-xs px-2 py-0.5 bg-gray-100 rounded-full">{toy.category}</span>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </header>
   );
 };

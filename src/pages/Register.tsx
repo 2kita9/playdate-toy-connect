@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -46,6 +46,7 @@ const Register = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -65,6 +66,9 @@ const Register = () => {
       title: "Registration successful",
       description: "Welcome to ToyGuider! Please check your email to verify your account.",
     });
+
+    // Redirect to home page after successful registration
+    navigate('/');
   };
 
   return (

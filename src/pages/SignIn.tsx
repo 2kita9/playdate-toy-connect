@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -39,6 +39,7 @@ type FormValues = z.infer<typeof formSchema>;
 const SignIn = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -56,6 +57,9 @@ const SignIn = () => {
       title: "Sign-in successful",
       description: "Welcome back to ToyGuider!",
     });
+    
+    // Redirect to home page after successful login
+    navigate('/');
   };
 
   return (
